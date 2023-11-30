@@ -33,7 +33,7 @@ const LoginPage = () => {
 
     try {
       const responsi = await fetch(
-        "http://jimenezmiapi.somee.com/api/Login/Acceso",
+        "https://jimenezmiapi.somee.com/api/Login/Acceso",
         {
           method: "POST",
           headers: {

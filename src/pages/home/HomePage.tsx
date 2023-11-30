@@ -19,7 +19,7 @@ function HomePage() {
       navigate("/");
     } else {
       fetch(
-        `http://jimenezmiapi.somee.com/api/Login/ValidarToken?token=${token}`,
+        `https://jimenezmiapi.somee.com/api/Login/ValidarToken?token=${token}`,
         {
           method: "HEAD",
         }

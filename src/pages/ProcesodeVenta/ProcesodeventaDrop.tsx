@@ -27,7 +27,7 @@ interface Task {
 
 
 const fetchTasks = async (): Promise<Task[]> => {
-    const response = await fetch(`http://jimenezmiapi.somee.com/api/ProcesoDeVenta?IdEmpleadoFk=${localStorage.getItem('idEmpleado')}`,{
+    const response = await fetch(`https://jimenezmiapi.somee.com/api/ProcesoDeVenta?IdEmpleadoFk=${localStorage.getItem('idEmpleado')}`,{
         headers: {
             Authorization : `Bearer ${localStorage.getItem('token')}`
         }
@@ -59,7 +59,7 @@ const fetchTasks = async (): Promise<Task[]> => {
 }
 
 const updateTask = async (id: number, newState: number) => {
-    const response = await fetch(`http://jimenezmiapi.somee.com/api/CambiarEstadoVenta/${id}/${newState}`, {
+    const response = await fetch(`https://jimenezmiapi.somee.com/api/CambiarEstadoVenta/${id}/${newState}`, {
         method: 'Post',
         headers: {
             'Content-Type': 'application/json',
@@ -136,13 +136,14 @@ export const DragAndDrop = () => {
             <div className='drag-and-drop'>
                 <div className='column column--1'>
                     <h3>
-                        Tareas por hacer
+                        Interes
                     </h3>
                     <div className='dd-zone' onDragOver={(evt => draggingOver(evt))} onDrop={(evt => onDrop(evt, 1))}>
                         {getList(1).map(item => (
                             <div className='dd-element' key={item.id} draggable onDragStart={(evt) => startDrag(evt, item)}>
                                 <strong className='title'>{item.Propiedad.direccion}</strong>
                                 <p className='body'>{item.cliente.nombre}</p>
+                                <p className='body'>{item.empleado.nombre}</p>
                                 <p className='body'>{item.estadoVentas.nombre}</p>
                             </div>
                         ))}
@@ -151,13 +152,14 @@ export const DragAndDrop = () => {
     
                 <div className='column column--2'>
                     <h3>
-                        Tareas en progreso
+                        Negociacion
                     </h3>
                     <div className='dd-zone' onDragOver={(evt => draggingOver(evt))} onDrop={(evt => onDrop(evt, 2))}>
                         {getList(2).map(item => (
                             <div className='dd-element' key={item.id} draggable onDragStart={(evt) => startDrag(evt, item)}>
                                 <strong className='title'>{item.Propiedad.direccion}</strong>
                                 <p className='body'>{item.cliente.nombre}</p>
+                                <p className='body'>{item.empleado.nombre}</p>
                                 <p className='body'>{item.estadoVentas.nombre}</p>
                             </div>
                         ))}
@@ -166,13 +168,14 @@ export const DragAndDrop = () => {
     
                 <div className='column column--3'>
                     <h3>
-                        Tareas realizadas
+                        Casi venta
                     </h3>
                     <div className='dd-zone' onDragOver={(evt => draggingOver(evt))} onDrop={(evt => onDrop(evt, 3))}>
                         {getList(3).map(item => (
                             <div className='dd-element' key={item.id} draggable onDragStart={(evt) => startDrag(evt, item)}>
                                 <strong className='title'>{item.Propiedad.direccion}</strong>
                                 <p className='body'>{item.cliente.nombre}</p>
+                                <p className='body'>{item.empleado.nombre}</p>
                                 <p className='body'>{item.estadoVentas.nombre}</p>
                             </div>
                         ))}

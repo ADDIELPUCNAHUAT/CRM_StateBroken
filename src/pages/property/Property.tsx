@@ -59,7 +59,7 @@ function Property() {
   const [propertyData, setPropertyData] = useState<PropertyData | null>(null);
 
   useEffect(() => {
-    fetch(`http://jimenezmiapi.somee.com/api/Inmueble?Id=${id}`,{
+    fetch(`https://jimenezmiapi.somee.com/api/Inmueble?Id=${id}`,{
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
