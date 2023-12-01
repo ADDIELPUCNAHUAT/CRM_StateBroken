@@ -3,6 +3,7 @@ import "./MisProcesosVenta.css";
 import "../../../../../src/styles/index.css";
 
 interface ProcesoVenta {
+    id: number;
     tipodePropiedad: string;
     cliente: {
         telefono: number;
@@ -58,8 +59,8 @@ function MisProcesosVenta() {
                         </tr>
                     </thead>
                     <tbody>
-                        {procesosVenta.map((procesoVenta, index) => (
-                            <tr key={index}>
+                        {procesosVenta.map((procesoVenta) => (
+                            <tr key={procesoVenta.id}>
                                 <td>{procesoVenta.tipodePropiedad === 'string' ? 'Inmueble' : procesoVenta.tipodePropiedad}</td>
                                 <td>{procesoVenta.cliente.nombre}</td>
                                 <td>{procesoVenta.cliente.telefono}</td>
