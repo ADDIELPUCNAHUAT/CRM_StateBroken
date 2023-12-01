@@ -124,6 +124,7 @@ export function FormCasa({onClose}: FomrCasaProps) {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
+        
         e.preventDefault();
 
         const response =await fetch('https://jimenezmiapi.somee.com/api/Inmueble', {
