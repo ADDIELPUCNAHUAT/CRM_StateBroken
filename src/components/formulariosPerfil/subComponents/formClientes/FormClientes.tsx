@@ -79,7 +79,6 @@ function FormClientes({ onClose }: FormClientesProps) {
             <input type="date" id="fechaNac" name="fechaNac" required onChange={handleChange} />
           </div>
         </div>
-        
         <button className='miBotonCliente' type="submit">Crear Cliente</button>
       </form>
     </div>

@@ -1,4 +1,5 @@
 h1{
+    text-align: left;
     margin-bottom: 2em;
     width: 100%;
 }
@@ -8,10 +9,12 @@ h3{
     margin-bottom: 2em;
 }
 
-/* img{
+
+.property-container img{
+
     height: 100%;
     object-fit: cover;    
-} */
+}
 
 .property-container{
     margin: 1em 0 0 1em;

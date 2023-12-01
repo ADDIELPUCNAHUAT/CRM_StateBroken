@@ -91,7 +91,7 @@ function Property() {
               <div className="profile-pic"></div>
               <div className="persona">
                 <h5>{propertyData.empleado.nombre}</h5>
-                <h6>{propertyData.fechaDeCreacion}</h6>
+                <h6>{new Date(propertyData.fechaDeCreacion).getFullYear()}</h6>
               </div>
             </div>
             <div className="details">

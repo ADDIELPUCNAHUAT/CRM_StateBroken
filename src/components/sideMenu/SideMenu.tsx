@@ -80,10 +80,10 @@ function SideMenu() {
               <i className="fas fa-bars"></i>
             </button>
 
-            <a className="navbar-brand" id="logo" href="/home">
+            <a className="navbar-brand" href="/home">
               <img
-                src="img\CasitaLogo.png"
-                height="50"
+                  id="logo-img"
+                src="img\CasitaLogo.png"      
                 alt="Estate Broker"
                 loading="lazy"
               />
