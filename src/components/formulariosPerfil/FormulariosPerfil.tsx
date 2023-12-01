@@ -6,6 +6,7 @@ import MisPropiedades from './subComponents/misPropiedades/MisPropiedades';
 import MisProcesosVenta from './subComponents/misProcesosVenta/MisProcesosVenta';
 import FormClientes from './subComponents/formClientes/FormClientes';
 import FormPropiedades from './subComponents/formPropiedades/FormPropiedades';
+import FormProcesoVenta from './subComponents/formProcesoVenta/FormProcesoVenta';
 
 function FormulariosPerfil() {
   const [mostrarFormulario, setMostrarFormulario] = useState<string | null>(null);
@@ -89,13 +90,14 @@ function FormulariosPerfil() {
         <div className="tab-pane container fade" id="contenido3">
           {mostrarFormulario === 'procesosVenta' ? (
             <>
-              <h1>Formulario de Procesos de Venta</h1>
-              <footer>
-                <button className="miBoton2" onClick={cerrarFormularioHandler}>
-                  Cerrar
-                </button>
-              </footer>
-            </>
+            <FormProcesoVenta />
+            <footer>
+              <button className="miBoton2" onClick={cerrarFormularioHandler}>
+                Cerrar
+              </button>
+            </footer>
+          </>
+
           ) : (
             <>
               <MisProcesosVenta />

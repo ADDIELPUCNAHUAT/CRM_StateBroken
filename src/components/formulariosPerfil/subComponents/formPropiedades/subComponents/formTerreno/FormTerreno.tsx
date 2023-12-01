@@ -19,7 +19,7 @@ function getDefaultFormData() {
 
     return {
         idEmpleadoFk: Number(localStorage.getItem('idEmpleado')),
-        idTipoFk: 3,
+        idTipoFk: 1,
         direccion: `CALLE ${getRandomNumber(1, 100)}`,
         descripcion: `Es un ${isTerreno ? 'terreno grande' : 'lote pequeño'}`,
         precioVenta: getRandomNumber(10000, 50000),
@@ -27,7 +27,7 @@ function getDefaultFormData() {
         accesosCarreteras: getRandomBoolean(),
         serviciosBasicos: getRandomBoolean(),
         arbolado: getRandomBoolean(),
-        fechaDeCreacion: new Date(getRandomNumber(1990, 2022), 0, 1).toISOString(),
+        fechaDeCreacion:new Date(Date.now()).toISOString(),
         fechaUltimoModificacion: new Date(getRandomNumber(1990, 2022), 0, 1).toISOString(),
         idEditorFk: 0,
         status: true,
@@ -41,7 +41,7 @@ const handleSubmit = async () => {
     const formData = getDefaultFormData();
 
     try {
-        const response = await fetch('http://jimenezmiapi.somee.com/api/PropiedadTerreno', {
+        const response = await fetch('https://jimenezmiapi.somee.com/api/PropiedadTerreno', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

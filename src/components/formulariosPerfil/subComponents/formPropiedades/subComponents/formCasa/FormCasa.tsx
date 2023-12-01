@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React, { useEffect, useState }  from 'react';
 import "./FormCasa.css";
 import "../../../../../../../src/styles/index.css";
 interface Casa {
@@ -31,6 +31,7 @@ interface Casa {
     img3Path: string;
     img4Path: string;
 }
+
 
 
 function getRandomImage(num: number) {
@@ -75,24 +76,24 @@ export function FormCasa({onClose}: FomrCasaProps) {
     const[casa,setCasa] = useState<Casa>({
     idEmpleadoFk: Number(localStorage.getItem('idEmpleado')),
     idTipoFk: 1,
-    direccion: "",
-    descripcion: "",
-    precioVenta: 0,
+    direccion: "Calle 1",
+    descripcion: "esta es una casa",
+    precioVenta: 200,
     precioRenta: 2000,
-    metrosCuadrados: 0,
+    metrosCuadrados: 20,
     metrosConstruidos: 30,
     fechaDeCreacion: new Date().toISOString(),
     fechaUltimaModificacion: new Date().toISOString(),
     idEditorFk: 0,
-    habitaciones: 0,
-    banos: 0,
+    habitaciones: 2,
+    banos: 2,
     piscina: false,
     balcon: false,
     cocina: false,
     comedor: false,
     garaje: false,
-    numPlantas: 0,
-    anoConstruccion: '',
+    numPlantas: 2,
+    anoConstruccion: '2009',
     sistemaCalefaccion: false,
     aireAcondicionado: true,
     amueblada: false,
@@ -105,6 +106,10 @@ export function FormCasa({onClose}: FomrCasaProps) {
 
     const [mensaje, setMensaje] = useState<string>('');
 
+    useEffect(() => {
+        console.log(casa);
+    }, [casa]);
+    
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let value: string | number | boolean = e.target.value;
     
@@ -112,42 +117,56 @@ export function FormCasa({onClose}: FomrCasaProps) {
             value = parseInt(e.target.value);
         } else if (e.target.type === 'checkbox') {
             value = e.target.checked;
-            console.log(`Checkbox ${e.target.name} changed to ${value}`);
-        } else if (e.target.name === 'anoConstruccion') {
+        }
+    
+        if (e.target.name === 'anoConstruccion') {
             const fecha = new Date(parseInt(e.target.value), 0); // Crear una fecha con el año y el mes de enero
             value = fecha.toISOString();
-            console.log(`anoConstruccion updated: ${value}`); // Agregar esta línea
         }
     
         setCasa(prevCasa => ({ ...prevCasa, [e.target.name]: value }));
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-
-        
         e.preventDefault();
-
-        const response =await fetch('https://jimenezmiapi.somee.com/api/Inmueble', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },  
-            body: JSON.stringify(casa),
-            
+    
+        try {
+            const response = await fetch('https://jimenezmiapi.somee.com/api/Inmueble', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },  
+                body: JSON.stringify(casa),
             });
-
+    
+            const responseClone = response.clone();
+    
             if(response.ok){
                 setMensaje('Post realizado correctamente');
-                onClose();
-            }else{
-                setMensaje('Error al realizar el post');
+                console.log('Post realizado correctamente');
+                if (typeof onClose === 'function') {
+                    onClose();
+                }
+            } else {
+                try {
+                    const responseData = await responseClone.json();
+                    setMensaje('Error al realizar el post');
+                    console.error(`Error al realizar el post: ${responseData}`);
+                } catch (error) {
+                    const responseText = await response.text();
+                    setMensaje('Error al realizar el post');
+                    console.error(`Error al realizar el post: ${responseText}`);
+                }
             }
-
+        } catch (error) {
+            setMensaje('Error al realizar el post');
+            console.error(`Error al realizar el post: ${error}`);
         }
+    }
     return (
         <div>
-            {mensaje && <div>{mensaje}</div>}
+            {mensaje && <div className="alert alert-info" style={{padding: '10px', textAlign: 'center'}}>{mensaje}</div>}
            <form className='miFormCasa'  onSubmit={handleSubmit}>
                 <h1 >Nueva casa</h1>
                 <div className='miDireccionCasa'>
